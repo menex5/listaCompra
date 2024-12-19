@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        #product-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .product {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 30%;
+            max-width: 200px;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .product span {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .add-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+
+        .input-name,
+        .input-image {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: calc(100% - 12px);
+        }
+
+        #cart {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #cart h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #cart-items {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item img {
+            max-width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .cart-item span {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+
+        #empty-cart {
+            text-align: center;
+            font-size: 16px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Loja de Produtos</h1>
+
+    <div id="product-list">
+        <div class="product">
+            <img src="https://superprix.vteximg.com.br/arquivos/ids/206745-600-600/_MG_4828.png?v=637804585779330000" alt="Pizza">
+            <span>Pizza</span>
+            <input type="text" class="input-name" placeholder="Nome do item">
+            <input type="text" class="input-image" placeholder="URL da imagem">
+            <button class="add-button" onclick="addToCart(0)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://midias.correiobraziliense.com.br/_midias/png/2024/06/21/675x450/1_review__1_-38300230.png?20240621174041?20240621174041" alt="Banana">
+            <span>Banana</span>
+            <input type="text" class="input-name" placeholder="Nome do item">
+            <input type="text" class="input-image" placeholder="URL da imagem">
+            <button class="add-button" onclick="addToCart(1)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://www.estadao.com.br/resizer/v2/L3LYN5Y4MRG6BB47MNHEEXDRGA.jpeg?quality=80&auth=c4f56563b2c83e506971bce35dbc505a5ecdf7d89a70d2f2c5fbb8b0c7071e5f&width=720&height=503&smart=true" alt="Hamburguer">
+            <span>Hambúrguer</span>
+            <input type="text" class="input-name" placeholder="Nome do item">
+            <input type="text" class="input-image" placeholder="URL da imagem">
+            <button class="add-button" onclick="addToCart(2)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://andinacocacola.vtexassets.com/arquivos/ids/158244/Coca-Cola-Original-350ml-Lata---110130_COCA_PAI.png?v=638628901095270000" alt="Coca-Cola">
+            <span>Coca-Cola</span>
+            <input type="text" class="input-name" placeholder="Nome do item">
+            <input type="text" class="input-image" placeholder="URL da imagem">
+            <button class="add-button" onclick="addToCart(3)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://img.freepik.com/fotos-gratis/cachorro-quente-de-carne-grelhada-com-lanche-de-ketchup-ia-generativa_188544-7829.jpg" alt="Cachorro Quente">
+            <span>Cachorro Quente</span>
+            <input type="text" class="input-name" placeholder="Nome do item">
+            <input type="text" class="input-image" placeholder="URL da imagem">
+            <button class="add-button" onclick="addToCart(4)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+           
+            <span>Escolha algum item</span>
+            <input type="text" class="input-name" placeholder="Nome do item">
+            <input type="text" class="input-image" placeholder="URL da imagem">
+            <button class="add-button" onclick="addToCart(4)">Adicionar ao Carrinho</button>
+        </div>
+    </div>
+
+    <div id="cart">
+        <h2>Carrinho</h2>
+        <ul id="cart-items"></ul>
+    </div>
+
+    <script>
+        function loadCart() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartList = document.getElementById('cart-items');
+            cartList.innerHTML = '';
+
+            if (cartItems.length === 0) {
+                cartList.innerHTML = '<p id="empty-cart">O carrinho está vazio</p>';
+            }
+
+            cartItems.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.classList.add('cart-item');
+
+                const productText = document.createElement('span');
+                productText.textContent = item.name;
+
+                const productImage = document.createElement('img');
+                productImage.src = item.image;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remover';
+                removeBtn.classList.add('remove-btn');
+                removeBtn.onclick = () => removeFromCart(index);
+
+                li.appendChild(productImage);
+                li.appendChild(productText);
+                li.appendChild(removeBtn);
+                cartList.appendChild(li);
+            });
+        }
+
+        function addToCart(index) {
+            const productElements = document.querySelectorAll('.product');
+
+            const inputName = productElements[index].querySelector('.input-name').value || productElements[index].querySelector('span').textContent;
+            const inputImage = productElements[index].querySelector('.input-image').value || productElements[index].querySelector('img').src;
+
+            let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            cartItems.push({ name: inputName, image: inputImage });
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            loadCart();
+        }
+
+        function removeFromCart(index) {
+            let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            cartItems.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            loadCart();
+        }
+
+        window.onload = loadCart;
+    </script>
+
+</body>
+
+</html>
